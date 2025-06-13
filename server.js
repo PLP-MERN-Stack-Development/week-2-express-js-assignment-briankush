@@ -114,6 +114,12 @@ app.use('/api/products', productRouter);
 // - Authentication
 // - Error handling
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  res.status(status).json({ error: err.message || 'Something went wrong!' });
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
